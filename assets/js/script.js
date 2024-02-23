@@ -69,10 +69,28 @@ document.getElementById('myTooltip').addEventListener('mouseenter', function () 
     document.querySelector(".tooltiptext").innerHTML = 'Copy to clipboard'
 })
 
-document.querySelector('.container').addEventListener('mouseover', function () {
+document.querySelector('.select').addEventListener('mouseover', function () {
     document.querySelector(".tooltip").style.visibility = 'visible'
 })
 
-document.querySelector('.container').addEventListener('mouseout', function () {
+document.querySelector('.select').addEventListener('mouseout', function () {
     document.querySelector(".tooltip").style.visibility = 'hidden'
 })
+
+
+// creating setting onclick event
+// document.getElementById('mySetting').addEventListener('click', function () {
+//     document.querySelector(".select").style.display = 'none'
+//     document.querySelector(".buttons").style.display = 'none'
+
+//     const btn = document.createElement("button");
+//     btn.innerHTML = "Hello Button";
+
+//     const para = document.createElement("p");
+//     para.style.fontSize = '24px'
+//     para.innerText = "This is a paragraph.";
+
+//     // Append to body:
+//     document.querySelector(".container").appendChild(para).appendChild(btn);
+// })  
+

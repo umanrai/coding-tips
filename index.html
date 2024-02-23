@@ -11,20 +11,28 @@
     </head>
     <body>
         <div class="container">
-            <div class="tooltip" id="myTooltip">
-                <i class="fa fa-clipboard" style="float: right;">
-                  <span class="tooltiptext">Copy to clipboard</span>
-                </i>
+
+            <div class="select">
+                <div class="setting" id="mySetting">
+                    <i class="fa fa-cogs">
+                      <span class="settingtext">Setting</span>
+                    </i>
                 </div>
+                <div class="tooltip" id="myTooltip">
+                    <i class="fa fa-clipboard" style="float: right;">
+                      <span class="tooltiptext">Copy to clipboard</span>
+                    </i>
+                </div>
+            
+            <h1>
+                <i class="fas fa-quote-left"></i>
+                <span class="quote" id="quote"></span>
+                <i class="fas fa-quote-right"></i>
+            </h1>
+            <p class="author" id="author"></p>
+            <hr/>
+           </div>
 
-           <h1>
-           <i class="fas fa-quote-left"></i>
-           <span class="quote" id="quote"></span>
-           <i class="fas fa-quote-right"></i>
-           </h1>
-           <p class="author" id="author"></p>
-
-           <hr/>
            <div class="buttons">
                <div>
                 <a class="btn twitter" id="tweet" title="Share to twitter" href="https://twitter.com/intent/tweet?text=Greetings" data-size="large" target="_blank" rel="noopener noreferrer"><i class="fab fa-twitter"></i></a>
@@ -32,7 +40,60 @@
                </div>
                <button class="next" id="next-quota">Next quote</button>
            </div>
+           <div class="tip"></div>
        </div>
         <script src="./assets/js/script.js" async defer></script>
+
+        <script>
+            // const directory = 'assets/data/tips/javascript.json';
+            const directory = 'assets/data/categories.json';
+            
+            // fetchJSONData('assets/data/tips/php.json')
+            //     .then((data)=> console.log(data))
+            //     .catch(error => console.error('Error getting php data:', error))
+
+            // creating setting onclick event
+            document.getElementById('mySetting').addEventListener('click', function () {
+                document.querySelector(".select").style.display = 'none'
+                document.querySelector(".buttons").style.display = 'none'
+                        
+                function showCategories() {
+                fetchJSONData('assets/data/categories.json')
+                    .then(categories => {
+                        // categories['categories'].forEach( uman => console.log(uman) );
+                        categories.categories.forEach( 
+                            function (row){
+                                console.log(row)
+                                const btn = document.createElement("button");
+                                btn.innerHTML = row;
+                                btn.classList.add("btn-language");
+                                // Append to body:
+                                document.querySelector(".tip").appendChild(btn);
+                            }
+                        
+                        );
+                        // create button
+                    })
+                    .catch(error => console.error('Error getting categories:', error))
+                }   
+                
+                showCategories()
+            }) 
+            
+
+            async function fetchJSONData(jsonFileFullPath) {
+                try {
+                    const response = await fetch(jsonFileFullPath);
+                    const data = await response.json();
+                    return data;
+                } catch (error) {
+                    console.error('Error fetching JSON files:', error);
+                    return [];
+                }
+            }
+
+            
+        </script>
+
     </body>
 </html>
