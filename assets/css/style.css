@@ -19,7 +19,7 @@ body{
 {
     display: flex;
     flex-direction: column;
-    padding: 30px;
+    padding: 20px 30px;
     box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.6);
     border-radius: 15px;
     width: 600px;
@@ -168,16 +168,96 @@ hr {
   opacity: 1;
 }
 
+.tip {
+  overflow-y: scroll;
+  height: 250px;
+  margin-left: 30px;
+  display: none;
+}
+
 .tip .btn-language{
   padding: 7px;
   width: 100px;
   margin: 4px;
 }
 
-.back button {
+/* 
+.setting {
+  float: right;
+  cursor: pointer;
+  position: relative;
+}
+
+.setting .settingtext {
+  visibility: hidden;
+  width: 110px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 4px;
+  position: absolute;
+  z-index: 1;
+  bottom: 150%;
+  margin-left: -65px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.setting .settingtext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+.setting:hover .settingtext{
+  visibility: visible;
+  opacity: 1;
+} */
+
+.back {
+    position: relative;
+    margin-bottom: 10px;
+}
+
+.back .backSetting {
+  /* visibility: hidden; */
+  display: none;
+  width: 110px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 4px;
+  position: absolute;
+  z-index: 1;
+  bottom: 115%;
+  margin-left: -50px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.back .backSetting::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+.back:hover .backSetting{
+  /* visibility: visible; */
+  display: block;
+  opacity: 1;
+}
+.back i {
   margin: 5px;
   cursor: pointer;
-  width: 40px;
   float: right;
   display: none;
 }
