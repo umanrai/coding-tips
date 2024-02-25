@@ -3,44 +3,74 @@ const author = document.getElementById("author");
 const tweetButton = document.getElementById("tweet");
 const fbButton = document.getElementById("facebook");
 
+getRandomQuote()
 
-let allQuotes = [];
-
-const getNewQuote = async () => {    
-    const response = await fetch("https://zenquotes.io/api/quotes");
+function getRandomQuote () {
+    getRandomCategory().then(category => {
+        console.log(resolveLanguage(category))
+        fetchJSONData("assets/data/tips/"+ resolveLanguage(category) +".json")
+            .then(function (response) {
+                let tips = response.tips
+                showRandomTip(tips, category)
+            }).catch(error => {
+                console.error('Error getting category wise tips:', error);
+            });
     
-    allQuotes = await response.json();
-
-    showRandomQuote()
+    }).catch(error => {
+        console.error('Error getting random category:', error);
+    });
 }
 
-getNewQuote();
+function getRandomCategory() {
+    return new Promise((resolve, reject) => {
+        let savedLanguages = getLanguages();
 
-function showRandomQuote() {
-    const indx = Math.floor(Math.random() * allQuotes.length);
+        if (!savedLanguages.length) {
+            fetchJSONData('assets/data/categories.json')
+                .then(categories => {
+                    savedLanguages = categories.categories;
+                    const categoryIndex = Math.floor(Math.random() * savedLanguages.length);
+
+                    const randomCategory = savedLanguages[categoryIndex];
+                    resolve(randomCategory);
+                })
+                .catch(error => {
+                    console.error('Error fetching categories:', error);
+                    reject(error);
+                });
+        } else {
+            const categoryIndex = Math.floor(Math.random() * savedLanguages.length);
+            const randomCategory = savedLanguages[categoryIndex];
+            resolve(randomCategory);
+        }
+    });
+}
+
+function showRandomTip(tips, category) {
+    const indx = Math.floor(Math.random() * tips.length);
     
-    const quote = allQuotes[indx].q;
-    const authorName = allQuotes[indx].a;
+    const tip = tips[indx];
+    const language = category;
 
     //Ternary Operator
-    author.innerHTML = "~ " + (authorName == null ? "Anonymous" : authorName)
+    author.innerHTML = "#" + (language == null ? "Anonymous" : language)
 
-    if (authorName == null) {
+    if (language == null) {
         author.innerHTML = "Anonymous";
     } else {
-        author.innerHTML = "~ " + authorName;
+        author.innerHTML = "#" + language;
     }
 
-    text.innerHTML = quote;
+    text.innerHTML = tip;
     
     // tweetButton.href = "https://twitter.com/intent/tweet?text=" + quote + " ~ " + authorName;
-    tweetButton.href = `https://twitter.com/intent/tweet?text=${quote} ~ ${authorName}`
+    tweetButton.href = `https://twitter.com/intent/tweet?text=${tip} ~ ${language}`
     // fbButton.href = "https://www.facebook.com/sharer/sharer.php?u=" + window.location.href + "&quote=" + quote;
-    fbButton.href = `https://www.facebook.com/sharer/sharer.php?u=${window.location.href}&quote=${quote}`
+    fbButton.href = `https://www.facebook.com/sharer/sharer.php?u=${window.location.href}&quote=${tip}`
 }
 
 document.getElementById('next-quota').addEventListener('click', function() {
-    showRandomQuote()
+    getRandomQuote()
 });
 
 document.getElementById('myTooltip').addEventListener('click', function () {
@@ -94,3 +124,135 @@ document.querySelector('.select').addEventListener('mouseout', function () {
 //     document.querySelector(".container").appendChild(para).appendChild(btn);
 // })  
 
+// const directory = 'assets/data/tips/javascript.json';
+
+// fetchJSONData('assets/data/tips/php.json')
+//     .then((data)=> console.log(data))
+//     .catch(error => console.error('Error getting php data:', error))
+
+// creating setting onclick event
+document.getElementById('mySetting').addEventListener('click', function () {
+    document.querySelector(".select").style.display = 'none'
+    document.querySelector(".buttons").style.display = 'none'
+    document.querySelector(".tip").style.display = 'block'
+    document.querySelector(".backBtn").style.display = 'block'
+
+    // If category buttons are empty create categories buttons else show already created buttons
+    if (document.querySelectorAll('.btn-language').length < 1) {
+        createCategoryButtons()
+    } else {
+        document.querySelector(".tip").style.display = 'block'
+    }
+})
+
+// <i class="fa fa-check"></i>
+function createCategoryButtons() {
+    fetchJSONData('assets/data/categories.json')
+        .then(categories => {
+            // categories['categories'].forEach( uman => console.log(uman) );
+            categories.categories.forEach(
+                function (categoryName) {
+                    const btn = document.createElement("button");
+                    btn.innerHTML = categoryName;
+                    btn.classList.add("btn-language");
+                    btn.classList.add("btn-" + resolveLanguage(categoryName));
+                    btn.style.cursor = "pointer"
+                    // Event Listener
+                    btn.addEventListener('click', function (e) {
+                        if (btn.querySelectorAll('.fa').length === 0) {
+                            const iTag = document.createElement("i");
+                            iTag.classList.add("fa");
+                            iTag.classList.add("fa-check");
+
+                            btn.appendChild(iTag)
+                            // e.target.innerHTML = e.target.innerHTML + "<i class='fa fa-check'></i>"
+                        } else {
+                            btn.querySelector('.fa').remove()
+                        }
+
+                        saveLanguages(categoryName)
+                    })
+
+                    // Append to body:
+                    document.querySelector(".tip").appendChild(btn);
+                }
+            );
+
+            showSavedLanguages()
+        })
+        .catch(error => console.error('Error getting categories:', error))
+}
+
+document.querySelector(".backBtn").addEventListener('click', function () {
+    document.querySelector(".select").style.display = 'block'
+    document.querySelector(".buttons").style.display = 'flex'
+    document.querySelector(".tip").style.display = 'none'
+    document.querySelector(".backBtn").style.display = 'none'
+})
+
+async function fetchJSONData(jsonFileFullPath) {
+    console.log("fetchJSONData", jsonFileFullPath)
+    try {
+        const response = await fetch(jsonFileFullPath);
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Error fetching JSON files:', error);
+        return [];
+    }
+}
+
+/**
+ * If the given language exist in our database then
+ * it will remove the language from database else
+ * it will save the given language.
+ */
+function saveLanguages(language) {
+    // All the languages saved in our database
+    let userLanguages = getLanguages();
+
+    let languages = [];
+
+    // Lets make sure the argument is not already added
+    // includes check if the give value exists in an array or not : 
+    // if value exists then it will give true else false
+    if ( userLanguages.includes(language) ) {
+        languages = userLanguages.filter(function (userLanguage) {
+            return userLanguage !== language;
+        })
+    } else {
+        languages = userLanguages;
+        languages.push(language)
+    }
+
+    // if language is already added, remove the language else save the language
+    localStorage.setItem("languages", JSON.stringify(languages || []));
+}
+
+/**
+ * Return the languages array
+ */
+function getLanguages() {
+    return JSON.parse( localStorage.getItem("languages") || "[]" );
+}
+
+function showSavedLanguages() {
+    let userLanguages = getLanguages();
+
+    userLanguages.forEach(
+        function (userLanguage) {
+
+            let btn = document.querySelector('.btn-' + resolveLanguage(userLanguage) )
+
+            const iTag = document.createElement("i");
+            iTag.classList.add("fa");
+            iTag.classList.add("fa-check");
+
+            btn.appendChild(iTag)
+        }
+    )
+}
+
+function resolveLanguage(text) {
+    return text.replaceAll(" ", "_").toLowerCase()
+}
