@@ -5,17 +5,17 @@ const fbButton = document.getElementById("facebook");
 
 getRandomQuote()
 
-function getRandomQuote () {
+function getRandomQuote() {
     getRandomCategory().then(category => {
         console.log(resolveLanguage(category))
-        fetchJSONData("assets/data/tips/"+ resolveLanguage(category) +".json")
+        fetchJSONData("assets/data/tips/" + resolveLanguage(category) + ".json")
             .then(function (response) {
                 let tips = response.tips
                 showRandomTip(tips, category)
             }).catch(error => {
                 console.error('Error getting category wise tips:', error);
             });
-    
+
     }).catch(error => {
         console.error('Error getting random category:', error);
     });
@@ -38,6 +38,13 @@ function getRandomCategory() {
                     console.error('Error fetching categories:', error);
                     reject(error);
                 });
+            // myAsyncFunction()
+            // .then(result => {
+            //     console.log(result); // Do something with the result
+            // })
+            // .catch(error => {
+            //     console.error(error); // Handle any errors
+            // });
         } else {
             const categoryIndex = Math.floor(Math.random() * savedLanguages.length);
             const randomCategory = savedLanguages[categoryIndex];
@@ -48,7 +55,7 @@ function getRandomCategory() {
 
 function showRandomTip(tips, category) {
     const indx = Math.floor(Math.random() * tips.length);
-    
+
     const tip = tips[indx];
     const language = category;
 
@@ -62,14 +69,14 @@ function showRandomTip(tips, category) {
     }
 
     text.innerHTML = tip;
-    
+
     // tweetButton.href = "https://twitter.com/intent/tweet?text=" + quote + " ~ " + authorName;
     tweetButton.href = `https://twitter.com/intent/tweet?text=${tip} ~ ${language}`
     // fbButton.href = "https://www.facebook.com/sharer/sharer.php?u=" + window.location.href + "&quote=" + quote;
     fbButton.href = `https://www.facebook.com/sharer/sharer.php?u=${window.location.href}&quote=${tip}`
 }
 
-document.getElementById('next-quota').addEventListener('click', function() {
+document.getElementById('next-quota').addEventListener('click', function () {
     getRandomQuote()
 });
 
@@ -191,7 +198,7 @@ document.querySelector(".backBtn").addEventListener('click', function () {
 })
 
 async function fetchJSONData(jsonFileFullPath) {
-    console.log("fetchJSONData", jsonFileFullPath)
+    // console.log("fetchJSONData", jsonFileFullPath)
     try {
         const response = await fetch(jsonFileFullPath);
         const data = await response.json();
@@ -200,6 +207,14 @@ async function fetchJSONData(jsonFileFullPath) {
         console.error('Error fetching JSON files:', error);
         return [];
     }
+    // async function myAsyncFunction() {
+    //     // For example, fetching data from an API
+    //     const response = await fetch('https://api.example.com/data');
+    //     const data = await response.json();
+
+    //     // Once the data is fetched, it can be manipulated or returned
+    //     return data;
+    // }
 }
 
 /**
@@ -216,7 +231,7 @@ function saveLanguages(language) {
     // Lets make sure the argument is not already added
     // includes check if the give value exists in an array or not : 
     // if value exists then it will give true else false
-    if ( userLanguages.includes(language) ) {
+    if (userLanguages.includes(language)) {
         languages = userLanguages.filter(function (userLanguage) {
             return userLanguage !== language;
         })
@@ -233,7 +248,7 @@ function saveLanguages(language) {
  * Return the languages array
  */
 function getLanguages() {
-    return JSON.parse( localStorage.getItem("languages") || "[]" );
+    return JSON.parse(localStorage.getItem("languages") || "[]");
 }
 
 function showSavedLanguages() {
@@ -242,7 +257,7 @@ function showSavedLanguages() {
     userLanguages.forEach(
         function (userLanguage) {
 
-            let btn = document.querySelector('.btn-' + resolveLanguage(userLanguage) )
+            let btn = document.querySelector('.btn-' + resolveLanguage(userLanguage))
 
             const iTag = document.createElement("i");
             iTag.classList.add("fa");
