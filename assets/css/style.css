@@ -222,3 +222,30 @@ hr {
   float: right;
   display: none;
 }
+
+/* mobile view and responsive */
+@media only screen and (max-width: 500px) {
+  .container{
+    width: 90%;
+  }
+  .quote {
+    font-size: 20px;
+  }
+
+  .fa-quote-left, .fa-quote-right {
+    font-size: 20px;
+  }
+
+  .author {
+    font-size: 18px;
+  }
+
+  .next {
+    font-size: 16px;
+  }
+
+  .tip {
+    height: 225px;
+    margin-left: 20px;
+  }
+}
