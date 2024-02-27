@@ -64,7 +64,7 @@ hr {
     border-radius: 4px;
     text-align: center;
     height: 35px;
-    padding: 10px
+    padding: 10px;
 }
 
 .twitter
@@ -82,11 +82,8 @@ hr {
 
 .next
 {
-    font-size:18px;
     border-radius: 5px;
     cursor:pointer;
-    padding: 10px;
-    margin-top: 5px;
     font-weight: bold;
 }
 
@@ -170,15 +167,17 @@ hr {
 
 .tip {
   overflow-y: scroll;
-  height: 250px;
-  margin-left: 30px;
+  max-height: 250px;
+  margin-left: 5px;
   display: none;
+  flex-wrap: wrap;
 }
 
 .tip .btn-language{
-  padding: 7px;
-  width: 105px;
+  width: auto;
   margin: 4px;
+  display: flex;
+  align-items: center;
 }
 
 .back {
@@ -216,20 +215,35 @@ hr {
   display: block;
   opacity: 1;
 }
-.back i {
-  margin: 5px;
+.back {
+  display: none;
+}
+.back i.backBtn {
   cursor: pointer;
   float: right;
-  display: none;
+}
+
+.btn-language .fa {
+  margin-left: 5px; 
 }
 
 /* mobile view and responsive */
-@media only screen and (max-width: 500px) {
+@media only screen and (max-width: 600px) {
   .container{
     width: 90%;
+    padding: 16px 15px;
   }
   .quote {
     font-size: 20px;
+    word-wrap: break-word;
+  }
+
+  .btn-language .fa {
+    margin-left: 5px; 
+  }
+
+  .btn-copy {
+    margin-right: 10px;
   }
 
   .fa-quote-left, .fa-quote-right {
@@ -245,7 +259,6 @@ hr {
   }
 
   .tip {
-    height: 225px;
-    margin-left: 30px;
+    margin-left: 5px;
   }
 }

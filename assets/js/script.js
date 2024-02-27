@@ -141,14 +141,14 @@ document.querySelector('.select').addEventListener('mouseout', function () {
 document.getElementById('mySetting').addEventListener('click', function () {
     document.querySelector(".select").style.display = 'none'
     document.querySelector(".buttons").style.display = 'none'
-    document.querySelector(".tip").style.display = 'block'
-    document.querySelector(".backBtn").style.display = 'block'
+    document.querySelector(".tip").style.display = 'flex'
+    document.querySelector(".back").style.display = 'block'
 
     // If category buttons are empty create categories buttons else show already created buttons
     if (document.querySelectorAll('.btn-language').length < 1) {
         createCategoryButtons()
     } else {
-        document.querySelector(".tip").style.display = 'block'
+        document.querySelector(".tip").style.display = 'flex'
     }
 })
 
@@ -162,6 +162,7 @@ function createCategoryButtons() {
                     const btn = document.createElement("button");
                     btn.innerHTML = categoryName;
                     btn.classList.add("btn-language");
+                    btn.classList.add("btn");
                     btn.classList.add("btn-" + resolveLanguage(categoryName));
                     btn.style.cursor = "pointer"
                     // Event Listener
@@ -194,7 +195,7 @@ document.querySelector(".backBtn").addEventListener('click', function () {
     document.querySelector(".select").style.display = 'block'
     document.querySelector(".buttons").style.display = 'flex'
     document.querySelector(".tip").style.display = 'none'
-    document.querySelector(".backBtn").style.display = 'none'
+    document.querySelector(".back").style.display = 'none'
 })
 
 async function fetchJSONData(jsonFileFullPath) {
