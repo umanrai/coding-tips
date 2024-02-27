@@ -237,7 +237,7 @@ hr {
   }
 
   .author {
-    font-size: 18px;
+    font-size: 20px;
   }
 
   .next {
@@ -246,6 +246,6 @@ hr {
 
   .tip {
     height: 225px;
-    margin-left: 20px;
+    margin-left: 30px;
   }
 }
