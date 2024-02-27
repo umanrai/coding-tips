@@ -34,17 +34,15 @@ body{
 .quote
 {
     text-align: center;
-    font-size: 40px;
     font-weight: bold;
 }
 .author 
 {
-
     margin:10px;
     text-align: right;
-    font-size: 25px;
-    font-style: italic;
-    font-family: cursive;
+    margin: 10px;
+    text-align: right;
+    font-size: 15px;
 }
 hr {
     margin: 10px 0;
@@ -80,11 +78,12 @@ hr {
     color: white;
 }
 
-.next
-{
+.next {
     border-radius: 5px;
     cursor:pointer;
     font-weight: bold;
+    display: flex;
+    align-items: center;
 }
 
 /* Tooltip copy styles */
@@ -97,16 +96,16 @@ hr {
   
 .tooltip .tooltiptext {
   visibility: hidden;
-  width: 145px;
+  width: auto;
   background-color: #555;
   color: #fff;
   text-align: center;
   border-radius: 6px;
-  padding: 5px;
+  padding: 4px;
   position: absolute;
   z-index: 1;
   bottom: 10px;
-  margin-left: -75px;
+  right: -10%;
   opacity: 0;
   transition: opacity 0.3s;
 }
@@ -115,7 +114,7 @@ hr {
   content: "";
   position: absolute;
   top: 100%;
-  left: 48%;
+  left: 52%;
   margin-left: -5px;
   border-width: 5px;
   border-style: solid;
@@ -135,16 +134,16 @@ hr {
 
 .setting .settingtext {
   visibility: hidden;
-  width: 110px;
+  width: auto;
   background-color: #555;
   color: #fff;
   text-align: center;
   border-radius: 6px;
-  padding: 4px;
+  padding: 6px;
   position: absolute;
   z-index: 1;
   bottom: 150%;
-  margin-left: -65px;
+  right: -14px;
   opacity: 0;
   transition: opacity 0.3s;
 }
@@ -166,9 +165,8 @@ hr {
 }
 
 .tip {
-  overflow-y: scroll;
+  overflow-y: auto;
   max-height: 250px;
-  margin-left: 5px;
   display: none;
   flex-wrap: wrap;
 }
@@ -178,6 +176,11 @@ hr {
   margin: 4px;
   display: flex;
   align-items: center;
+  justify-content: center;
+}
+
+.container input .input-search{
+  display: none;
 }
 
 .back {
@@ -186,20 +189,20 @@ hr {
 }
 
 .back .backSetting {
-  /* visibility: hidden; */
-  display: none;
-  width: 110px;
-  background-color: #555;
-  color: #fff;
-  text-align: center;
-  border-radius: 6px;
-  padding: 4px;
-  position: absolute;
-  z-index: 1;
-  bottom: 115%;
-  margin-left: -50px;
-  opacity: 0;
-  transition: opacity 0.3s;
+     /* visibility: hidden; */
+     display: none;
+     width: auto;
+     background-color: #555;
+     color: #fff;
+     text-align: center;
+     border-radius: 6px;
+     padding: 4px;
+     position: absolute;
+     z-index: 1;
+     bottom: 115%;
+     right: -4%;
+     opacity: 0;
+     transition: opacity 0.3s;
 }
 .back .backSetting::after {
   content: "";
@@ -210,7 +213,7 @@ hr {
   border-style: solid;
   border-color: #555 transparent transparent transparent;
 }
-.backBtn:hover .backSetting{
+.back:hover .backSetting{
   /* visibility: visible; */
   display: block;
   opacity: 1;
@@ -218,14 +221,24 @@ hr {
 .back {
   display: none;
 }
-.back i.backBtn {
+.back .backBtn {
   cursor: pointer;
   float: right;
+  margin-right: 10px;
 }
 
 .btn-language .fa {
   margin-left: 5px; 
 }
+
+.input-search {
+  padding: 5px;
+  margin: 4px;
+}
+
+/* .btn-language:nth-child(5) {
+  background-color: red;
+} */
 
 /* mobile view and responsive */
 @media only screen and (max-width: 600px) {

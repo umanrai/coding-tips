@@ -7,7 +7,7 @@ getRandomQuote()
 
 function getRandomQuote() {
     getRandomCategory().then(category => {
-        console.log(resolveLanguage(category))
+        //console.log(resolveLanguage(category))
         fetchJSONData("assets/data/tips/" + resolveLanguage(category) + ".json")
             .then(function (response) {
                 let tips = response.tips
@@ -24,7 +24,6 @@ function getRandomQuote() {
 function getRandomCategory() {
     return new Promise((resolve, reject) => {
         let savedLanguages = getLanguages();
-
         if (!savedLanguages.length) {
             fetchJSONData('assets/data/categories.json')
                 .then(categories => {
@@ -141,14 +140,19 @@ document.querySelector('.select').addEventListener('mouseout', function () {
 document.getElementById('mySetting').addEventListener('click', function () {
     document.querySelector(".select").style.display = 'none'
     document.querySelector(".buttons").style.display = 'none'
-    document.querySelector(".tip").style.display = 'flex'
+    document.querySelector(".tip").style.display = 'grid'
     document.querySelector(".back").style.display = 'block'
+    if (document.querySelector(".input-search")){
+        document.querySelector(".input-search").style.display = 'block'
+    }
+    
+
 
     // If category buttons are empty create categories buttons else show already created buttons
     if (document.querySelectorAll('.btn-language').length < 1) {
         createCategoryButtons()
     } else {
-        document.querySelector(".tip").style.display = 'flex'
+        document.querySelector(".tip").style.display = 'grid'
     }
 })
 
@@ -156,6 +160,38 @@ document.getElementById('mySetting').addEventListener('click', function () {
 function createCategoryButtons() {
     fetchJSONData('assets/data/categories.json')
         .then(categories => {
+
+            const searchInput = document.createElement("input");
+            searchInput.classList.add("input-search");
+            searchInput.placeholder = "Search languages..."
+
+            searchInput.addEventListener('keyup', function (event) {
+                    var searchTerm = event.target.value;
+                    var languageBtns = document.querySelectorAll(".btn-language");
+
+                    if (languageBtns && languageBtns.length > 0) {
+                        if (searchTerm.length >= 1) {
+                            languageBtns.forEach(languageBtn => {
+                                if (languageBtn.innerHTML.toLowerCase().includes(searchTerm)) {
+                                    languageBtn.style.display = "block";
+                                } else {
+                                    languageBtn.style.display = "none";
+                                }
+                            });
+                    
+                        } else {
+                            languageBtns.forEach(languageBtn => {
+                                languageBtn.style.display = "block";
+                            });
+                        }
+                    }
+                });
+
+            document.querySelector(".tip").parentNode.insertBefore(
+                searchInput,
+                document.querySelector(".tip")
+            );
+
             // categories['categories'].forEach( uman => console.log(uman) );
             categories.categories.forEach(
                 function (categoryName) {
@@ -196,6 +232,7 @@ document.querySelector(".backBtn").addEventListener('click', function () {
     document.querySelector(".buttons").style.display = 'flex'
     document.querySelector(".tip").style.display = 'none'
     document.querySelector(".back").style.display = 'none'
+    document.querySelector(".input-search").style.display = 'none'
 })
 
 async function fetchJSONData(jsonFileFullPath) {
@@ -272,3 +309,5 @@ function showSavedLanguages() {
 function resolveLanguage(text) {
     return text.replaceAll(" ", "_").toLowerCase()
 }
+
+// for search
