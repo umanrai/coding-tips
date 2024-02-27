@@ -172,7 +172,7 @@ function createCategoryButtons() {
                     if (languageBtns && languageBtns.length > 0) {
                         if (searchTerm.length >= 1) {
                             languageBtns.forEach(languageBtn => {
-                                if (languageBtn.innerHTML.toLowerCase().includes(searchTerm.toLowerCase)) {
+                                if (languageBtn.innerHTML.toLowerCase().includes(searchTerm.toLowerCase())) {
                                     languageBtn.style.display = "block";
                                 } else {
                                     languageBtn.style.display = "none";
