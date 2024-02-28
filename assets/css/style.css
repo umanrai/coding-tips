@@ -380,8 +380,7 @@ hr {
 /* mobile view and responsive */
 @media only screen and (max-width: 600px) {
   .container {
-    width: 90%;
-    padding: 16px 15px;
+    width: 275px;
   }
 
   .quote {
