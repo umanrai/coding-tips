@@ -140,6 +140,7 @@ document.querySelector('.select').addEventListener('mouseout', function () {
 document.getElementById('mySetting').addEventListener('click', function () {
     document.querySelector(".select").style.display = 'none'
     document.querySelector(".buttons").style.display = 'none'
+    document.querySelector(".header").style.display = 'none'
     document.querySelector(".tip").style.display = 'grid'
     document.querySelector(".back").style.display = 'block'
     if (document.querySelector(".input-search")){
@@ -160,7 +161,7 @@ document.getElementById('mySetting').addEventListener('click', function () {
 function createCategoryButtons() {
     fetchJSONData('assets/data/categories.json')
         .then(categories => {
-
+            // search function
             const searchInput = document.createElement("input");
             searchInput.classList.add("input-search");
             searchInput.placeholder = "Search languages..."
@@ -229,6 +230,7 @@ function createCategoryButtons() {
 
 document.querySelector(".backBtn").addEventListener('click', function () {
     document.querySelector(".select").style.display = 'block'
+    document.querySelector(".header").style.display = 'block'
     document.querySelector(".buttons").style.display = 'flex'
     document.querySelector(".tip").style.display = 'none'
     document.querySelector(".back").style.display = 'none'
@@ -310,4 +312,23 @@ function resolveLanguage(text) {
     return text.replaceAll(" ", "_").toLowerCase()
 }
 
-// for search
+// key stroke
+document.addEventListener('keydown', function(event) {
+    //console.log(event.key, event.code, event.keyCode)
+
+    // if (event.keyCode === 39) {
+    //     //console.log("key is working..")
+    //     getRandomQuote()
+    // }
+
+    // if (event.code == "ArrowRight") {
+    //     //console.log("key is working..")
+    //     getRandomQuote()
+    // }
+    
+    if (event.key == "ArrowRight") {
+        // console.log("key is working..")
+        getRandomQuote()
+    }
+});
+

@@ -14,51 +14,59 @@
 </head>
 
 <body>
-    <div class="container">
-        <div class="back">
-            <b> <i class="fa fa-save"></i> Save the languages</b>
-              
-            </i>
-            <i class="fa fa-arrow-left backBtn"></i>
-            <span class="backSetting">Back setting</span>
+    <div class="app">
+        <div class="header">
+            <h2>Tips</h2>
+            <h2>Tips</h2>
         </div>
-
-        <div class="select">
-            <div class="setting" >
-                <i class="fa fa-cogs" id="mySetting"> 
+        <div class="container">
+            <div class="back">
+                <b> <i class="fa fa-save"></i> Save the languages</b>
+                  
                 </i>
-                <span class="settingtext">Setting</span>
+                <i class="fa fa-arrow-left backBtn"></i>
+                <span class="backSetting">Back setting</span>
             </div>
-            <div class="tooltip" id="myTooltip">
-                <i class="fa fa-clipboard btn-copy" style="float: right;">
-                </i>
-                <span class="tooltiptext">Copy to clipboard</span>
+    
+            <div class="select">
+                <div class="setting" >
+                    <i class="fa fa-cogs" id="mySetting"> 
+                    </i>
+                    <span class="settingtext">Setting</span>
+                </div>
+                <div class="tooltip" id="myTooltip">
+                    <i class="fa fa-clipboard btn-copy" style="float: right;">
+                    </i>
+                    <span class="tooltiptext">Copy to clipboard</span>
+                </div>
+    
+                <h1>
+    
+                    <i class="fas fa-quote-left"></i>
+                    <span class="quote" id="quote"></span>
+                    <i class="fas fa-quote-right"></i>
+                </h1>
+                <p class="author" id="author"></p>
+                <hr />
             </div>
-
-            <h1>
-
-                <i class="fas fa-quote-left"></i>
-                <span class="quote" id="quote"></span>
-                <i class="fas fa-quote-right"></i>
-            </h1>
-            <p class="author" id="author"></p>
-            <hr />
+    
+    
+            <div class="buttons">
+                <div>
+                    <a class="btn twitter" id="tweet" title="Share to twitter"
+                        href="https://twitter.com/intent/tweet?text=Greetings" data-size="large" target="_blank"
+                        rel="noopener noreferrer"><i class="fab fa-twitter"></i></a>
+                    <a class="btn facebook" id="facebook" title="Share to facebook"
+                        href="https://www.facebook.com/sharer/sharer.php?quote=Greetings" data-size="large" target="_blank"
+                        rel="noopener noreferrer"><i class="fab fa-facebook"></i></a>
+                </div>
+                <button class="btn next" id="next-quota">Next quote</button>
+            </div>
+            <div class="tip"></div>
         </div>
-
-
-        <div class="buttons">
-            <div>
-                <a class="btn twitter" id="tweet" title="Share to twitter"
-                    href="https://twitter.com/intent/tweet?text=Greetings" data-size="large" target="_blank"
-                    rel="noopener noreferrer"><i class="fab fa-twitter"></i></a>
-                <a class="btn facebook" id="facebook" title="Share to facebook"
-                    href="https://www.facebook.com/sharer/sharer.php?quote=Greetings" data-size="large" target="_blank"
-                    rel="noopener noreferrer"><i class="fab fa-facebook"></i></a>
-            </div>
-            <button class="btn next" id="next-quota">Next quote</button>
-        </div>
-        <div class="tip"></div>
     </div>
+
+    <div class="cup"></div>
     <script src="./assets/js/script.js" async defer></script>
 
 </body>
