@@ -283,48 +283,6 @@ hr {
   background-color: red;
 } */
 
-/* mobile view and responsive */
-@media only screen and (max-width: 600px) {
-  .container {
-    width: 90%;
-    padding: 16px 15px;
-  }
-
-  .quote {
-    font-size: 20px;
-    word-wrap: break-word;
-  }
-
-  .btn-language .fa {
-    margin-left: 5px;
-  }
-
-  .btn-copy {
-    margin-right: 10px;
-  }
-
-  .fa-quote-left,
-  .fa-quote-right {
-    font-size: 20px;
-  }
-
-  .author {
-    font-size: 20px;
-  }
-
-  .next {
-    font-size: 16px;
-  }
-
-  .tip {
-    margin-left: 5px;
-  }
-
-  .cup {
-    left: 50%;
-  }
-}
-
 .header {
   position: relative;
 }
@@ -378,33 +336,34 @@ hr {
 
 .cup {
   position: absolute;
-  top: 90%;
-  left: 94%;
-  transform: translate(-50%, -50%);
-  width: 70px;
-  height: 80px;
-  border: 1px solid #262626;
-  border-top: 1px solid transparent;
-  border-radius: 15px;
-  border-top-left-radius: 2px;
-  border-top-right-radius: 2px;
-  background: url(https://image.ibb.co/fmHm66/wave.png);
-  background-position: 0px 350px;
-  background-repeat: repeat-x;
-  animation: filling 10s ease-in-out infinite;
-  box-shadow: 0 0 0 5px #fff, 0 20px 35px rgba(0, 0, 0, 1);
+    bottom: 1%;
+    right: 1%;
+    transform: translate(-50%, -50%);
+    width: 50px;
+    height: 60px;
+    border: 1px solid #262626;
+    border-top: 1px solid transparent;
+    border-radius: 15px;
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+    background: url(../img/wave.png);
+    background-position: 0px 350px;
+    background-repeat: repeat-x;
+    animation: filling 10s ease-in-out infinite;
+    box-shadow: 0 0 0 5px #fff, 0 20px 35px rgba(0, 0, 0, 1);
+    text-align: center;
 }
 
 .cup:before {
   content: '';
-  position: absolute;
-  width: 25px;
-  height: 30px;
-  border: 5px solid #fff;
-  right: -36px;
-  top: 20px;
-  border-top-right-radius: 121px;
-  border-bottom-right-radius: 220px;
+    position: absolute;
+    width: 15px;
+    height: 25px;
+    border: 4px solid #fff;
+    right: -25px;
+    top: 9px;
+    border-top-right-radius: 92px;
+    border-bottom-right-radius: 200px;
 }
 
 @keyframes filling {
@@ -414,5 +373,63 @@ hr {
 
   100% {
     background-position: 6000px 350px;
+  }
+}
+
+
+/* mobile view and responsive */
+@media only screen and (max-width: 600px) {
+  .container {
+    width: 90%;
+    padding: 16px 15px;
+  }
+
+  .quote {
+    font-size: 20px;
+    word-wrap: break-word;
+  }
+
+  .btn-language .fa {
+    margin-left: 5px;
+  }
+
+  .btn-copy {
+    margin-right: 10px;
+  }
+
+  .fa-quote-left,
+  .fa-quote-right {
+    font-size: 20px;
+  }
+
+  .author {
+    font-size: 20px;
+  }
+
+  .next {
+    font-size: 16px;
+  }
+
+  .tip {
+    margin-left: 5px;
+  }
+
+  .cup {
+    position: absolute;
+    right: 5%;
+    width: 50px;
+    height: 50px;
+  }
+
+  .cup:before {
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 25px;
+    border: 4px solid #fff;
+    top: 10px;
+    left: 102%;
+    border-top-right-radius: 121px;
+    border-bottom-right-radius: 149px;
   }
 }
